@@ -25,7 +25,7 @@ function startGame (blob) {
 
 function loadViaXHR () {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/helicopter.gb");
+  xhr.open("GET", "/rom.gb");
   xhr.responseType = "blob";
   xhr.onload = function () {
     startGame(new Blob([this.response], { type: "text/plain" }));
