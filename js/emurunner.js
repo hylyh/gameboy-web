@@ -17,11 +17,7 @@ function startGame (blob) {
   var binaryHandle = new FileReader();
   binaryHandle.onload = function () {
     if (this.readyState === 2) {
-      try {
-        start(mainCanvas, this.result);
-      } catch (e) {
-        alert(e.message);
-      }
+      start(mainCanvas, this.result);
     }
   };
   binaryHandle.readAsBinaryString(blob);
@@ -51,63 +47,61 @@ function loadViaXHR () {
 };
 
 function windowingInitialize() {
-	mainCanvas = document.getElementById("mainCanvas");
-	registerGUIEvents();
+  mainCanvas = document.getElementById("mainCanvas");
+  var ctx = mainCanvas.getContext("2d");
+  ctx.imageSmoothingEnabled = false;
+  ctx.webkitImageSmoothingEnabled = false;
+  ctx.mozImageSmoothingEnabled = false;
+  registerGUIEvents();
   ("MozActivity" in window ? loadViaMozActivity : loadViaXHR)();
 }
 
 window.addEventListener("DOMContentLoaded", windowingInitialize);
 function registerGUIEvents() {
-	addEvent("keydown", document, keyDown);
-	addEvent("keyup", document,  function (event) {
-		keyUp(event);
-	});
-	addEvent("MozOrientation", window, GameBoyGyroSignalHandler);
-	addEvent("deviceorientation", window, GameBoyGyroSignalHandler);
-	addEvent("resize", window, initNewCanvasSize);
+  addEvent("keydown", document, keyDown);
+  addEvent("keyup", document,  function (event) {
+    keyUp(event);
+  });
+  addEvent("MozOrientation", window, GameBoyGyroSignalHandler);
+  addEvent("deviceorientation", window, GameBoyGyroSignalHandler);
+  addEvent("resize", window, initNewCanvasSize);
 }
 function keyDown(event) {
-	var keyCode = event.keyCode;
-	var keyMapLength = keyZones.length;
-	for (var keyMapIndex = 0; keyMapIndex < keyMapLength; ++keyMapIndex) {
-		var keyCheck = keyZones[keyMapIndex];
-		var keysMapped = keyCheck[1];
-		var keysTotal = keysMapped.length;
-		for (var index = 0; index < keysTotal; ++index) {
-			if (keysMapped[index] == keyCode) {
-				GameBoyKeyDown(keyCheck[0]);
-				try {
-					event.preventDefault();
-				}
-				catch (error) { }
-			}
-		}
-	}
+  var keyCode = event.keyCode;
+  var keyMapLength = keyZones.length;
+  for (var keyMapIndex = 0; keyMapIndex < keyMapLength; ++keyMapIndex) {
+    var keyCheck = keyZones[keyMapIndex];
+    var keysMapped = keyCheck[1];
+    var keysTotal = keysMapped.length;
+    for (var index = 0; index < keysTotal; ++index) {
+      if (keysMapped[index] == keyCode) {
+        GameBoyKeyDown(keyCheck[0]);
+        event.preventDefault();
+      }
+    }
+  }
 }
 function keyUp(event) {
-	var keyCode = event.keyCode;
-	var keyMapLength = keyZones.length;
-	for (var keyMapIndex = 0; keyMapIndex < keyMapLength; ++keyMapIndex) {
-		var keyCheck = keyZones[keyMapIndex];
-		var keysMapped = keyCheck[1];
-		var keysTotal = keysMapped.length;
-		for (var index = 0; index < keysTotal; ++index) {
-			if (keysMapped[index] == keyCode) {
-				console.log(keyCheck[0])
-				GameBoyKeyUp(keyCheck[0]);
-				try {
-					event.preventDefault();
-				}
-				catch (error) { }
-			}
-		}
-	}
+  var keyCode = event.keyCode;
+  var keyMapLength = keyZones.length;
+  for (var keyMapIndex = 0; keyMapIndex < keyMapLength; ++keyMapIndex) {
+    var keyCheck = keyZones[keyMapIndex];
+    var keysMapped = keyCheck[1];
+    var keysTotal = keysMapped.length;
+    for (var index = 0; index < keysTotal; ++index) {
+      if (keysMapped[index] == keyCode) {
+        console.log(keyCheck[0])
+        GameBoyKeyUp(keyCheck[0]);
+        event.preventDefault();
+      }
+    }
+  }
 }
 
 function addEvent(sEvent, oElement, fListener) {
-	oElement.addEventListener(sEvent, fListener, false);
+  oElement.addEventListener(sEvent, fListener, false);
 }
 function removeEvent(sEvent, oElement, fListener) {
-		oElement.removeEventListener(sEvent, fListener, false);
-		oElement.detachEvent("on" + sEvent, fListener);	//Pity for IE.
+    oElement.removeEventListener(sEvent, fListener, false);
+    oElement.detachEvent("on" + sEvent, fListener);	//Pity for IE.
 }

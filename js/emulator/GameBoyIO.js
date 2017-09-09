@@ -15,8 +15,8 @@ var settings = [						//Some settings.
 	false,								//Override MBC RAM disabling and always allow reading and writing to the banks.
 	false,								//Use the GameBoy boot ROM instead of the GameBoy Color boot ROM.
 	false,								//Scale the canvas in JS, or let the browser scale the canvas?
-	true,								//Use image smoothing based scaling?
-    [true, true, true, true]            //User controlled channel enables.
+	false,								//Use image smoothing based scaling?
+  [true, true, true, true]            //User controlled channel enables.
 ];
 function start(canvas, ROM) {
 	clearLastEmulation();
