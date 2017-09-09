@@ -5,8 +5,8 @@ var keyZones = [
   ["left", [37]],
   ["up", [38]],
   ["down", [40]],
-  ["a", [88, 74]],
-  ["b", [90, 81, 89]],
+  ["a", [65]],
+  ["b", [83]],
   ["select", [16]],
   ["start", [13]]
 ];
@@ -35,7 +35,8 @@ function loadViaXHR () {
 
 function windowingInitialize() {
 	mainCanvas = document.getElementById("mainCanvas");
-	registerGUIEvents();
+  registerGUIEvents();
+  loadViaXHR();
 }
 
 window.addEventListener("DOMContentLoaded", windowingInitialize);
@@ -47,7 +48,8 @@ function registerGUIEvents() {
 	addEvent("resize", window, initNewCanvasSize);
 }
 function keyDown(event) {
-	var keyCode = event.keyCode;
+  var keyCode = event.keyCode;
+  cout(keyCode);
 	var keyMapLength = keyZones.length;
 	for (var keyMapIndex = 0; keyMapIndex < keyMapLength; ++keyMapIndex) {
 		var keyCheck = keyZones[keyMapIndex];
