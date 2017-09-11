@@ -1,4 +1,5 @@
-**Copyright (C) 2010 - 2016 Grant Galitz**
+**Copyright for portions of this project are held by Grant Galitz, 2010 - 2016 as part of project GameBoy-Online**  
+**All other copyright for this project are held by j hayley, 2017**
 
 **License:**
 
