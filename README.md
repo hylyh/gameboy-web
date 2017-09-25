@@ -1,4 +1,4 @@
-JavaScript GameBoy Color Emulator
+web-based gameboy/gameboy color emulator
 =================================
 
 A GameBoy Color emulator that utilizes HTML5 canvas and JavaScript audio APIs to provide a full emulation of the console.
