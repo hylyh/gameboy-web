@@ -28,10 +28,12 @@ function startGame (blob) {
   binaryHandle.onload = function () {
     if (this.readyState === 2) {
       start(mainCanvas, this.result);
+      resizeCanvas();
     }
   };
   settings[13] = false; // Crisp edges
   binaryHandle.readAsBinaryString(blob);
+
 };
 
 function loadViaXHR () {
