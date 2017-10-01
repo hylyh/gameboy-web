@@ -1,6 +1,4 @@
 html, body {
-  width: 640px;
-  height: 100%;
   background-color: rgb(239, 255, 222);
   color: rgb(82, 146, 115);
   text-align: center;
@@ -22,7 +20,7 @@ a {
   -ms-interpolation-mode: nearest-neighbor;
 
   border: 2px solid rgb(82, 146, 115);
-  margin: 20px;
+  margin: 0;
 }
 
 #instructions span {

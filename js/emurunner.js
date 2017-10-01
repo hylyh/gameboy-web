@@ -11,6 +11,11 @@ var keyZones = [
   ["start", [13]]
 ];
 
+var GBWIDTH = 160;
+var GBHEIGHT = 144;
+var ASPECTRATIO = GBHEIGHT / GBWIDTH;
+var maxWidth = 160 * 4;
+
 var roms = {
   "#helicopter": "/gameboy-helicopter/helicopter.gb",
   "#glitchshooter": "/gameboy-glitch-shooter/glitch.gb"
@@ -25,6 +30,7 @@ function startGame (blob) {
       start(mainCanvas, this.result);
     }
   };
+  settings[13] = false; // Crisp edges
   binaryHandle.readAsBinaryString(blob);
 };
 
@@ -44,13 +50,19 @@ function windowingInitialize() {
   loadViaXHR();
 }
 
+function resizeCanvas() {
+  mainCanvas.width = window.innerWidth < maxWidth ? window.innerWidth : maxWidth;
+  mainCanvas.height = ASPECTRATIO * mainCanvas.width;
+  initNewCanvasSize();
+}
+
 window.addEventListener("DOMContentLoaded", windowingInitialize);
 function registerGUIEvents() {
   addEvent("keydown", document, keyDown);
   addEvent("keyup", document,  function (event) {
     keyUp(event);
   });
-  addEvent("resize", window, initNewCanvasSize);
+  addEvent("resize", window, resizeCanvas);
 }
 function keyDown(event) {
   var keyCode = event.keyCode;
