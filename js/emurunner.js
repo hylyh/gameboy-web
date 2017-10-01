@@ -14,6 +14,7 @@ var keyZones = [
 var GBWIDTH = 160;
 var GBHEIGHT = 144;
 var ASPECTRATIO = GBHEIGHT / GBWIDTH;
+var PADDING = 10;
 var maxWidth = 160 * 4;
 
 var roms = {
@@ -34,7 +35,26 @@ function startGame (blob) {
   settings[13] = false; // Crisp edges
   binaryHandle.readAsBinaryString(blob);
 
+  initButtons();
 };
+
+function initButtons() {
+  var buttonDown = function(e) {
+    var name = e.srcElement.dataset.button || e.srcElement.parentElement.dataset.button;
+    GameBoyKeyDown(name);
+  }
+
+  var buttonUp = function(e) {
+    var name = e.srcElement.dataset.button || e.srcElement.parentElement.dataset.button;
+    GameBoyKeyUp(name);
+  }
+
+  var buttons = document.getElementsByClassName("button");
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].ontouchstart = buttons[i].onmousedown = buttonDown;
+    buttons[i].ontouchend = buttons[i].onmouseup = buttonUp;
+  }
+}
 
 function loadViaXHR () {
   var xhr = new XMLHttpRequest();
@@ -53,7 +73,7 @@ function windowingInitialize() {
 }
 
 function resizeCanvas() {
-  mainCanvas.width = window.innerWidth < maxWidth ? window.innerWidth : maxWidth;
+  mainCanvas.width = (window.innerWidth < maxWidth ? window.innerWidth : maxWidth) - PADDING;
   mainCanvas.height = ASPECTRATIO * mainCanvas.width;
   initNewCanvasSize();
 }
@@ -76,8 +96,14 @@ function keyDown(event) {
     var keysTotal = keysMapped.length;
     for (var index = 0; index < keysTotal; ++index) {
       if (keysMapped[index] == keyCode) {
+
+        // Also show on the onscreen buttons
+        document.getElementsByClassName("button " + keyCheck[0])[0].classList.add("clicked");
+        console.log(keyCheck[0])
+
         GameBoyKeyDown(keyCheck[0]);
         event.preventDefault();
+        return;
       }
     }
   }
@@ -91,9 +117,13 @@ function keyUp(event) {
     var keysTotal = keysMapped.length;
     for (var index = 0; index < keysTotal; ++index) {
       if (keysMapped[index] == keyCode) {
-        console.log(keyCheck[0])
+
+        // Also show on the onscreen buttons
+        document.getElementsByClassName("button " + keyCheck[0])[0].classList.remove("clicked");
+
         GameBoyKeyUp(keyCheck[0]);
         event.preventDefault();
+        return;
       }
     }
   }

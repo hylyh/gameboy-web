@@ -1,0 +1,201 @@
+---
+---
+@charset "utf-8";
+
+$gbcolor0: rgb(239, 255, 222) ;
+$gbcolor1: rgb(173, 215, 148);
+$gbcolor2: rgb(82, 146, 115);
+$gbcolor3: rgb(24, 52, 66);
+
+$buttonpadding: 2px;
+$buttonborderradius: 5px;
+
+$dpadbuttonsizelong: 70px;
+$dpadbuttonsizeshort: 40px;
+$buttonborderradius: 5px;
+
+html, body {
+  background-color: $gbcolor2;
+  color: $gbcolor0;
+  text-align: center;
+  margin: auto;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+#mainCanvas {
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -o-crisp-edges;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+
+  border: 2px solid $gbcolor0;
+
+  margin: 0;
+  margin-top: 10px;
+}
+
+#instructions span {
+  margin: 0 10px;
+}
+
+#rightbuttons {
+  display: inline-block;
+  width: $dpadbuttonsizelong * 2 + $dpadbuttonsizeshort;
+}
+
+#leftbuttons {
+  display: inline-block;
+}
+
+#bottombuttons {
+  display: block;
+  margin-top: $dpadbuttonsizeshort;
+}
+
+.button {
+  display: inline-block;
+  background-color: $gbcolor1;
+  color: $gbcolor2;
+  cursor: default;
+  position: absolute;
+  padding: 0;
+  border: $buttonpadding solid $gbcolor1;
+  border-radius: $buttonborderradius;
+
+  transition: box-shadow .5s;
+  transition: background-color .2s;
+
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+
+  &:hover, &.clicked {
+    background-color: $gbcolor2;
+    padding: 0;
+  }
+
+  &:active, &.clicked {
+    box-shadow: inset 0px 0px 50px -20px $gbcolor3;
+  }
+}
+
+#dpad, #ab, #startselect {
+  position: relative;
+  display: inline-block;
+}
+
+#dpad {
+  width: $dpadbuttonsizelong * 2 + $dpadbuttonsizeshort;
+  height: $dpadbuttonsizelong * 2;
+
+  .center {
+    position: absolute;
+    background-color: $gbcolor1;
+    width: $dpadbuttonsizeshort + $buttonpadding * 2;
+    height: $dpadbuttonsizeshort + $buttonpadding * 2;
+    top: $dpadbuttonsizelong - $dpadbuttonsizeshort + $dpadbuttonsizeshort / 2px;
+    left: $dpadbuttonsizelong;
+  }
+
+  .up {
+    width: $dpadbuttonsizeshort;
+    height: $dpadbuttonsizelong - $dpadbuttonsizeshort / 2;
+    height: $dpadbuttonsizelong - $dpadbuttonsizeshort / 2;
+
+    top: $dpadbuttonsizeshort / 16;
+    left: $dpadbuttonsizelong;
+
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .down {
+    width: $dpadbuttonsizeshort;
+    height: $dpadbuttonsizelong - $dpadbuttonsizeshort / 2 - $buttonpadding * 3;
+
+    bottom: $dpadbuttonsizeshort / 16;
+    left: $dpadbuttonsizelong;
+
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .left {
+    width: $dpadbuttonsizelong - $dpadbuttonsizeshort / 2;
+    height: $dpadbuttonsizeshort;
+
+    left: $dpadbuttonsizeshort / 2;
+    top: $dpadbuttonsizelong - $dpadbuttonsizeshort / 2;
+
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .right {
+    width: $dpadbuttonsizelong - $dpadbuttonsizeshort / 2 - $buttonpadding * 2;
+    height: $dpadbuttonsizeshort;
+
+    right: $dpadbuttonsizeshort / 2;
+    top: $dpadbuttonsizelong - $dpadbuttonsizeshort / 2;
+
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+#ab {
+  width: ($dpadbuttonsizeshort + $buttonpadding) * 2 + $dpadbuttonsizeshort;
+  height: $dpadbuttonsizeshort + $buttonpadding * 2;
+
+  display: block;
+  margin-left: $dpadbuttonsizelong * 2 + $dpadbuttonsizeshort - $dpadbuttonsizeshort * 3 - $buttonpadding * 2;
+  margin-bottom: $dpadbuttonsizeshort + $buttonpadding * 4;
+
+  .button {
+    width: $dpadbuttonsizeshort;
+    height: $dpadbuttonsizeshort;
+
+    div {
+      width: 100%;
+      margin-top: 25%;
+    }
+  }
+
+  .a {
+    right: 0;
+    top: -$dpadbuttonsizeshort / 4;
+  }
+
+  .b {
+    left: 0;
+    bottom: -$dpadbuttonsizeshort / 4;
+  }
+}
+
+#startselect {
+  width: ($dpadbuttonsizelong + $buttonpadding) * 2 + $dpadbuttonsizeshort / 2;
+  height: $dpadbuttonsizeshort + $buttonpadding * 2;
+
+  margin-left: $dpadbuttonsizelong * 2 + $dpadbuttonsizeshort - $dpadbuttonsizelong * 2 - $buttonpadding * 2;
+
+  .button {
+    width: $dpadbuttonsizelong;
+    height: $dpadbuttonsizeshort / 2;
+  }
+
+  .start {
+    right: 0;
+  }
+
+  .select {
+    left: 0;
+  }
+}
