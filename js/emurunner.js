@@ -54,6 +54,25 @@ function initButtons() {
     buttons[i].ontouchstart = buttons[i].onmousedown = buttonDown;
     buttons[i].ontouchend = buttons[i].onmouseup = buttonUp;
   }
+
+  var uploadButton = document.getElementsByClassName("upload")[0];
+  uploadButton.onmouseup = function() {
+    document.getElementById("uploadrom").click();
+  }
+}
+
+function uploadRom(files) {
+  console.log(files);
+  var reader = new FileReader();
+  reader.onload = function () {
+    if (this.readyState === 2) {
+      console.log(this.result);
+      start(mainCanvas, this.result);
+      resizeCanvas();
+    }
+  };
+
+  reader.readAsBinaryString(files[0])
 }
 
 function loadViaXHR () {

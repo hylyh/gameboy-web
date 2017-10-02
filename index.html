@@ -9,6 +9,10 @@
     <div id="canvas_container">
       <canvas id="mainCanvas" width="640" height="576">No Canvas Support</canvas>
     </div>
+      <div id="systembuttons">
+        <div class="button upload">upload rom</div>
+        <input type="file" id="uploadrom" accept=".gb,.gbc" style="display:none" onchange="uploadRom(this.files)" />
+      </div>
     <div id="buttons">
       <div id="leftbuttons">
         <div id="dpad">

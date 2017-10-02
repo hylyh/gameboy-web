@@ -41,8 +41,11 @@ a {
   margin-top: 10px;
 }
 
-#instructions span {
-  margin: 0 10px;
+#instructions {
+  display: none;
+  span {
+    margin: 0 10px;
+  }
 }
 
 #rightbuttons {
@@ -57,6 +60,38 @@ a {
 #bottombuttons {
   display: block;
   margin-top: $dpadbuttonsizeshort;
+}
+
+#systembuttons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: 40px;
+  margin-bottom: 40px;
+
+  .button {
+    background-color: $gbcolor2;
+    color: $gbcolor1;
+    position: relative;
+    padding: $dpadbuttonsizeshort / 4;
+
+    transition: box-shadow .5s;
+    transition: background-color .2s;
+    transition: color .2s;
+
+    &:hover, &.clicked {
+      background-color: $gbcolor1;
+      color: $gbcolor2;
+    }
+
+    &:active, &.clicked {
+      box-shadow: inset 0px 0px 50px -20px $gbcolor3;
+    }
+  }
+}
+
+#buttons {
+  display: inline-block;
 }
 
 .button {
@@ -183,8 +218,6 @@ a {
 #startselect {
   width: ($dpadbuttonsizelong + $buttonpadding) * 2 + $dpadbuttonsizeshort / 2;
   height: $dpadbuttonsizeshort + $buttonpadding * 2;
-
-  margin-left: $dpadbuttonsizelong * 2 + $dpadbuttonsizeshort - $dpadbuttonsizelong * 2 - $buttonpadding * 2;
 
   .button {
     width: $dpadbuttonsizelong;
